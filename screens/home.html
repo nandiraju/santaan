@@ -1,0 +1,283 @@
+<style type="text/css" media="screen">
+    #hero_banner {
+        background: url('img/withhat.jpg') no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        height: 700px;
+        position: relative;
+    }
+    
+    #lead_text {
+        color: white;
+        text-align: center;
+        /*background-color: rgba(0,0,0,0.5);*/
+        padding: 10px;
+        letter-spacing: 3px;
+        font-family: 'Lato';
+        font-weight: 300;
+    }
+    
+    #lead_text>span {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    
+    .snap {
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    .city_text {
+        color: white;
+        width: 100%;
+        text-align: center;
+        margin-top: 80px;
+        font-size: 2em;
+        font-weight: bold;
+        font-family: Verdana;
+    }
+    
+    .sidebar-panel {
+        border-radius: 0px;
+        border: none;
+    }
+</style>
+
+<div id="hero_banner">
+    <div class="container-fluid" style="position: absolute;left: 0px;bottom:0px;right:0px;background: linear-gradient(transparent,rgba(0, 0, 0, 0.6))">
+        <div class="row">
+            <div class="animated fadeInDown col-sm-12 text-center">
+                <h1 id="lead_text">FIND
+                    <br/>
+                    <span>INFERTILITY CLINICS</span></h1>
+                <button onclick="$('body').trigger('show_search_screen');" class="btn btn-primary btn-lg" style="border-radius: 0px;background-color: rgba(0,0,0,0.5);border:1px dotted black;">
+					Search by city
+				</button>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1 style="padding:50px 0px;font-family:Lato;">Explore IVF clinics
+                <br>
+                <small>across India</small></h1>
+        </div>
+    </div>
+    <div class="row" id="cities">
+        &nbsp;
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin:20px 0px;">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center callout flex-container">
+    <h1 style="margin:20px;color:white;">Our purpose
+        <br> is to help people find best
+        <br>
+        <span style="font-size: 2em;"><b>IVF Clinic's</b></span>
+        <br> in India </h1>
+</div>
+
+<div style="padding:20px 0px;background: #f5f5f5;">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-9" id="feeds">
+
+            </div>
+            <div class="col-sm-3" id="sidebar">
+
+                <!-- <div class="panel panel-default sidebar-panel" style="margin-top: 10px;">
+                    <div class="panel-body text-center">
+                        <p style="color:gray;">
+                            <strong>HOW DOES IVF WORK?</strong>
+                            <br> Watch this video to understand how IVF works.
+                        </p>
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/kcJWPWb2uBs" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="panel panel-default  sidebar-panel" style="background: #efefef;">
+                    <div class="panel-body">
+                        <p style="font-family:verdana;font-size:1.2em;color: gray;text-align: center">
+                            Have a tip, pitch or guest column? Send us a note.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="panel panel-default  sidebar-panel">
+                    <div class="panel-body">
+                        <a class="embedly-card" href="https://www.youtube.com/watch?v=pvYaMRbOoCo">Ivf India Dr. K.D Nayar Explains Women Infertility Causes - Akanksha Ivf Centre Delhi</a>
+                        <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                    </div>
+                </div>
+
+            </div> -->
+
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <div id="ONE_TILE_DARKOVERLAY" style="display:none;">
+        {{#tiles}}
+        <div class="cover-card col-sm-{{spans}} tile-holder">
+            <div class="panel panel-default tile-panel" data-for-tile="{{citySelected}}" style="cursor: pointer">
+                <div class="panel-body tile-body" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.4)),url({{image}}) no-repeat center center;background-size:cover;">
+                    <p class="lead tile-content">
+                        {{name}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/tiles}}
+    </div>
+
+    <div id="ONE_NEWS" style="display:none;">
+
+        {{#news}}
+
+        <div class="panel panel-default" style="border:none;border-radius: 0px;margin:10px 0px;">
+            <div class="panel-body">
+                <div class="row flex-container">
+
+                    <div class="col-xs-8 text-center">
+                        <h1 style="font-size:2em;"> {{{title}}} </h1>
+                        <p>
+                            {{contentSnippet}}
+                        </p>
+                        <span style="color:gray;">{{readableDay}}</span>
+                        <br />
+                        <a class="btn btn-info btn-sm" href="{{link}}" target="_blank">Read More</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <img src="{{image}}" alt="" width="175" class="center-block img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{/news}}
+
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+        var cityData = [{
+            name: "Kochi, Kerala",
+            searchLat: 9.9312328,
+            searchLon: 76.26730410000005,
+            image: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Kerala_houseboat.jpg',
+        }, {
+            name: "Delhi, Madhya Pradesh",
+            searchLat: 28.6139391,
+            searchLon: 77.20902120000005,
+            image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/India_Gate_in_New_Delhi_03-2016.jpg',
+        }, {
+            name: "Hyderabad, Telangana",
+            searchLat: 17.385044,
+            searchLon: 78.486671,
+            image: 'http://t0.gstatic.com/images?q=tbn:ANd9GcQshQbjI0yihGAPnnUXmK2oPLhn7YtKjkF7kRMQZOn8nBCMn9SK',
+        }, {
+            name: "Mumbai, Maharashtra",
+            searchLat: 19.0759837,
+            searchLon: 72.87765590000004,
+            image: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Victoria_Terminus%2C_Mumbai.jpg',
+        }, {
+            name: "Bengaluru, Karnataka",
+            searchLat: 12.9715987,
+            searchLon: 77.59456269999998,
+            image: 'http://cdn.indiamarks.com/wp-content/uploads/best-time-to-go-to-Bnagalore.jpg',
+        }, {
+            name: "Chennai, Tamil Nadu",
+            searchLat: 13.0826802,
+            searchLon: 80.27071840000008,
+            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Chennai_India.jpg/440px-Chennai_India.jpg',
+        }, {
+            name: "Kolkata, West Bengal",
+            searchLat: 22.572646,
+            searchLon: 88.36389499999996,
+            image: 'http://upload.wikimedia.org/wikipedia/commons/7/73/Victoria_Memorial_Kolkata_panorama.jpg',
+        }];
+
+        function attachEventOnTile() {
+            $(".tile-panel").on('click', function(e) {
+                var dataFromTile = $(this).attr('data-for-tile');
+                showSelectedCity(dataFromTile);
+                //alert(dataFromTile);
+                console.log(dataFromTile);
+            });
+        }
+
+        function showSelectedCity(whichOne) {
+            var featuredCity = cityData[whichOne];
+            searchLat = featuredCity.searchLat;
+            searchLon = featuredCity.searchLon;
+            searchLocationText = featuredCity.name;
+            searchResults = [];
+            paginator = undefined;
+            window.location.href = "#/list";
+        }
+
+        function setupTiles() {
+            var layouts = [6, 6, 4, 4, 4];
+            var index = -1;
+
+            function getSpan() {
+                index++;
+                if (index >= layouts.length) {
+                    index = 0;
+                };
+                return layouts[index];
+            }
+
+            for (var i = 0; i < cityData.length; i++) {
+                cityData[i].spans = getSpan();
+                cityData[i].citySelected = i;
+                if (cityData[i].image.length < 1) {
+                    cityData[i].image = 'http://lorempixel.com/600/400/city/' + Math.abs(i % 10);
+                }
+            }
+
+            var tiletemplate = $('#ONE_TILE_DARKOVERLAY').html();
+            var tilesHtml = Mustache.to_html(tiletemplate, {
+                tiles: cityData
+            });
+            $("#cities").html(tilesHtml);
+            attachEventOnTile();
+        }
+
+
+        $(document).ready(function() {
+            setupTiles();
+            var images = [];
+
+            //images.push("http://www.owenhodge.com.au/wp-content/uploads/2015/04/New-Parents1.png");
+            images.push("img/santaanpics/pic11.jpg");
+            images.push("img/santaanpics/pic5.jpg");
+            images.push("img/santaanpics/pic14.jpg");
+            images.push("img/santaanpics/pic16.jpg");
+            images.push("img/santaanpics/pic13.jpg");
+            images.push("img/parents.png");
+            images.push("img/santaanpics/pic9.jpg");
+
+            $("#hero_banner").backstretch(images, {
+                speed: 3000,
+                centeredY: true
+            });
+
+            //parseRSS('https://news.google.com/news?cf=all&ned=in&hl=en&output=rss&q=IVF+clinics+india');
+        });
+    </script>

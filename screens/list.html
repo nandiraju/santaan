@@ -1,0 +1,78 @@
+<!-- div id="search_wrapper" class="flex-container" style="background-color: #333;padding:5px;margin:0px;height:50px;">
+<div class="container animated fadeInDown">
+<div class="row">
+<div class="col-md-4 col-md-offset-4 text-center">
+<div class="input-group">
+<input class="form-control input-md" name="searchTextField" placeholder="Enter" id="searchTextField" onFocus="geolocate()">
+<span class="input-group-btn">
+<button class="btn btn-success btn-md" type="button" id="searchbutton">
+Find Stores
+</button> </span>
+</div>
+</div>
+</div>
+</div>
+</div -->
+
+<div style="background-color: #fff;color:black;">
+	<div class="container  animated fadeInUp" style="margin-top: 20px;">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h1 id="search_message"></h1>
+				<br />
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row" id="holder"></div>
+	<br />
+	<br />
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3 text-center">
+			<button class="btn btn-info" id="more" style="margin:20px;">
+				Shore more results
+			</button>
+		</div>
+	</div>
+</div>
+<div id="search-places-list" style="display: none;">
+	{{#rows}}
+
+	<div class="col-sm-6" style="margin:0px;padding:0px;">
+
+		<div class="panel panel-default card" style="margin:15px;border: none;border-radius: 0px;">
+			<a href="#/storedetails/{{place_id}}">
+			<div class="panel-body" style="width:100%;position:relative; height:350px;background: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)),url({{image}}) no-repeat center center;background-size:cover;">
+				<p class="name_of_shop">
+					{{name}}
+				</p>
+				<p class="address_of_shop">
+					<i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{vicinity}}
+				</p>
+				<p class="rating_of_shop">
+					<i class="fa fa-star"></i>&nbsp;&nbsp;Rating : {{rating}}
+				</p>
+			</div> </a>
+		</div>
+
+	</div>
+	{{/rows}}
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$('body').css('background-color', '#fff');
+		if (!searchResults || searchResults.length < 1) {
+			console.log("Re-initing in list screen ...");
+			initialize();
+		}
+
+		renderResults(searchResults);
+
+		$("#more").click(function() {
+			paginator.nextPage();
+		});
+	});
+</script>
+
