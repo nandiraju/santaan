@@ -1,47 +1,39 @@
-function parseRSS(url) {
-	$.ajax({
-		url : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=?&q=' + encodeURIComponent(url),
-		dataType : 'json',
-		success : function(data) {
-			console.log(data);
-			var news = [];
-			var img = '';
+var newsItems;
 
-			for (var i = 0; i < data.responseData.feed.entries.length; i++) {
-				var value = data.responseData.feed.entries[i];
-				try {
-					var firstimg = $(value.content).find("img:first").attr("src");
-					if (firstimg) {
-						img = firstimg;
-					} else {
-						img = 'http://lorempixel.com/80/80/fashion/';
-					}
+function loadData(text) {
+    var skey = "'" + escape(text) + "'";
 
-				} catch(err) {
-					console.log("error");
-				}
-				var oneItem = {
-					title : value.title,
-					link : value.link,
-					image : img,
-					contentSnippet : value.contentSnippet,
-					content : value.content,
-					publishedDate : value.publishedDate,
-					readableDay : moment(value.publishedDate).fromNow(),
-					author : value.author
-				};
-				news.push(oneItem);
-			}
-			renderNews(news);
-		}
-	});
-
+    text = encodeURI(text);
+    var yql = encodeURIComponent("select * from xml where url='https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en'");
+    var modifiedItems = [];
+    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=" + yql + "&format=json&callback=?", function(data) {
+        if (!data.query.results.rss.channel.item || data.query.results.rss.channel.item.length < 1) {
+            alert("No data found");
+            return;
+        }
+        var items = data.query.results.rss.channel.item;
+        $.each(items, function(i, item) {
+            var oneItem = {
+                feedlink: item.link,
+                title: item.title,
+                date: item.pubDate,
+                description: $(item.description).text(),
+                richDescription: item.description,
+                col2: $(item.description).find("td:first-child+td").html(),
+                image: $(item.description).find("img:first").attr("src")
+            };
+            modifiedItems.push(oneItem);
+        });
+        newsItems = modifiedItems;
+        renderNews(modifiedItems);
+    });
 }
 
+
 function renderNews(newsItems) {
-	var tiletemplate = $('#ONE_NEWS').html();
-	var tilesHtml = Mustache.to_html(tiletemplate, {
-		news : newsItems
-	});
-	$("#feeds").html(tilesHtml);
+    var tiletemplate = $('#ONE_NEWS').html();
+    var tilesHtml = Mustache.to_html(tiletemplate, {
+        news: newsItems
+    });
+    $("#feeds").html(tilesHtml);
 }

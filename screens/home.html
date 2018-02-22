@@ -90,16 +90,16 @@
         <br> in India </h1>
 </div>
 
-<div style="padding:20px 0px;background: #f5f5f5;">
+<div style="padding:20px 0px;background: #efefef;">
     <div class="container">
 
-        <div class="row">
-            <div class="col-sm-9" id="feeds">
+        <div class="row m_row" id="feeds">
+            <!-- <div id="feeds">
 
-            </div>
-            <div class="col-sm-3" id="sidebar">
+            </div> -->
+            <!-- <div class="col-sm-3" id="sidebar"> -->
 
-                <!-- <div class="panel panel-default sidebar-panel" style="margin-top: 10px;">
+            <!-- <div class="panel panel-default sidebar-panel" style="margin-top: 10px;">
                     <div class="panel-body text-center">
                         <p style="color:gray;">
                             <strong>HOW DOES IVF WORK?</strong>
@@ -126,158 +126,157 @@
 
             </div> -->
 
+        </div>
+        <br>
+        <br>
+    </div>
+</div>
+
+<div id="ONE_TILE_DARKOVERLAY" style="display:none;">
+    {{#tiles}}
+    <div class="cover-card col-sm-{{spans}} tile-holder">
+        <div class="panel panel-default tile-panel" data-for-tile="{{citySelected}}" style="cursor: pointer">
+            <div class="panel-body tile-body" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.4)),url({{image}}) no-repeat center center;background-size:cover;">
+                <p class="lead tile-content">
+                    {{name}}
+                </p>
             </div>
-            <br>
-            <br>
         </div>
     </div>
+    {{/tiles}}
+</div>
 
-    <div id="ONE_TILE_DARKOVERLAY" style="display:none;">
-        {{#tiles}}
-        <div class="cover-card col-sm-{{spans}} tile-holder">
-            <div class="panel panel-default tile-panel" data-for-tile="{{citySelected}}" style="cursor: pointer">
-                <div class="panel-body tile-body" style="background: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.4)),url({{image}}) no-repeat center center;background-size:cover;">
-                    <p class="lead tile-content">
-                        {{name}}
-                    </p>
-                </div>
-            </div>
+<div id="ONE_NEWS" style="display:none;">
+
+    {{#news}}
+
+    <div class="panel panel-default m_panel text-center" style="border-top:2px solid silver;border-radius:10px;">
+        <div class="panel-body">
+            <p style="text-align:center;font-size:1.2em;font-weight:bold;"> {{{title}}} </p>
+            <img src="{{image}}" alt="" width="175" class="center-block img-thumbnail" />
+            <p>
+                {{description}}
+            </p>
+            <a class="btn btn-info btn-sm" href="{{feedlink}}" target="_blank">Read More</a>
         </div>
-        {{/tiles}}
-    </div>
-
-    <div id="ONE_NEWS" style="display:none;">
-
-        {{#news}}
-
-        <div class="panel panel-default" style="border:none;border-radius: 0px;margin:10px 0px;">
-            <div class="panel-body">
-                <div class="row flex-container">
-
-                    <div class="col-xs-8 text-center">
-                        <h1 style="font-size:2em;"> {{{title}}} </h1>
-                        <p>
-                            {{contentSnippet}}
-                        </p>
-                        <span style="color:gray;">{{readableDay}}</span>
-                        <br />
-                        <a class="btn btn-info btn-sm" href="{{link}}" target="_blank">Read More</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <img src="{{image}}" alt="" width="175" class="center-block img-thumbnail" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{/news}}
 
     </div>
 
-    <script type="text/javascript" charset="utf-8">
-        var cityData = [{
-            name: "Kochi, Kerala",
-            searchLat: 9.9312328,
-            searchLon: 76.26730410000005,
-            image: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Kerala_houseboat.jpg',
-        }, {
-            name: "Delhi, Madhya Pradesh",
-            searchLat: 28.6139391,
-            searchLon: 77.20902120000005,
-            image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/India_Gate_in_New_Delhi_03-2016.jpg',
-        }, {
-            name: "Hyderabad, Telangana",
-            searchLat: 17.385044,
-            searchLon: 78.486671,
-            image: 'http://t0.gstatic.com/images?q=tbn:ANd9GcQshQbjI0yihGAPnnUXmK2oPLhn7YtKjkF7kRMQZOn8nBCMn9SK',
-        }, {
-            name: "Mumbai, Maharashtra",
-            searchLat: 19.0759837,
-            searchLon: 72.87765590000004,
-            image: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Victoria_Terminus%2C_Mumbai.jpg',
-        }, {
-            name: "Bengaluru, Karnataka",
-            searchLat: 12.9715987,
-            searchLon: 77.59456269999998,
-            image: 'http://cdn.indiamarks.com/wp-content/uploads/best-time-to-go-to-Bnagalore.jpg',
-        }, {
-            name: "Chennai, Tamil Nadu",
-            searchLat: 13.0826802,
-            searchLon: 80.27071840000008,
-            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Chennai_India.jpg/440px-Chennai_India.jpg',
-        }, {
-            name: "Kolkata, West Bengal",
-            searchLat: 22.572646,
-            searchLon: 88.36389499999996,
-            image: 'http://upload.wikimedia.org/wikipedia/commons/7/73/Victoria_Memorial_Kolkata_panorama.jpg',
-        }];
+    {{/news}}
 
-        function attachEventOnTile() {
-            $(".tile-panel").on('click', function(e) {
-                var dataFromTile = $(this).attr('data-for-tile');
-                showSelectedCity(dataFromTile);
-                //alert(dataFromTile);
-                console.log(dataFromTile);
-            });
-        }
+</div>
 
-        function showSelectedCity(whichOne) {
-            var featuredCity = cityData[whichOne];
-            searchLat = featuredCity.searchLat;
-            searchLon = featuredCity.searchLon;
-            searchLocationText = featuredCity.name;
-            searchResults = [];
-            paginator = undefined;
-            window.location.href = "#/list";
-        }
+<script type="text/javascript" charset="utf-8">
+    var cityData = [{
+        name: "Kochi, Kerala",
+        searchLat: 9.9312328,
+        searchLon: 76.26730410000005,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Kerala_houseboat.jpg',
+    }, {
+        name: "Delhi, Madhya Pradesh",
+        searchLat: 28.6139391,
+        searchLon: 77.20902120000005,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/India_Gate_in_New_Delhi_03-2016.jpg',
+    }, {
+        name: "Hyderabad, Telangana",
+        searchLat: 17.385044,
+        searchLon: 78.486671,
+        image: 'http://t0.gstatic.com/images?q=tbn:ANd9GcQshQbjI0yihGAPnnUXmK2oPLhn7YtKjkF7kRMQZOn8nBCMn9SK',
+    }, {
+        name: "Mumbai, Maharashtra",
+        searchLat: 19.0759837,
+        searchLon: 72.87765590000004,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/8/86/Victoria_Terminus%2C_Mumbai.jpg',
+    }, {
+        name: "Bengaluru, Karnataka",
+        searchLat: 12.9715987,
+        searchLon: 77.59456269999998,
+        image: 'http://cdn.indiamarks.com/wp-content/uploads/best-time-to-go-to-Bnagalore.jpg',
+    }, {
+        name: "Chennai, Tamil Nadu",
+        searchLat: 13.0826802,
+        searchLon: 80.27071840000008,
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Chennai_India.jpg/440px-Chennai_India.jpg',
+    }, {
+        name: "Kolkata, West Bengal",
+        searchLat: 22.572646,
+        searchLon: 88.36389499999996,
+        image: 'http://upload.wikimedia.org/wikipedia/commons/7/73/Victoria_Memorial_Kolkata_panorama.jpg',
+    }];
 
-        function setupTiles() {
-            var layouts = [6, 6, 4, 4, 4];
-            var index = -1;
-
-            function getSpan() {
-                index++;
-                if (index >= layouts.length) {
-                    index = 0;
-                };
-                return layouts[index];
-            }
-
-            for (var i = 0; i < cityData.length; i++) {
-                cityData[i].spans = getSpan();
-                cityData[i].citySelected = i;
-                if (cityData[i].image.length < 1) {
-                    cityData[i].image = 'http://lorempixel.com/600/400/city/' + Math.abs(i % 10);
-                }
-            }
-
-            var tiletemplate = $('#ONE_TILE_DARKOVERLAY').html();
-            var tilesHtml = Mustache.to_html(tiletemplate, {
-                tiles: cityData
-            });
-            $("#cities").html(tilesHtml);
-            attachEventOnTile();
-        }
-
-
-        $(document).ready(function() {
-            setupTiles();
-            var images = [];
-
-            //images.push("http://www.owenhodge.com.au/wp-content/uploads/2015/04/New-Parents1.png");
-            images.push("img/santaanpics/pic11.jpg");
-            images.push("img/santaanpics/pic5.jpg");
-            images.push("img/santaanpics/pic14.jpg");
-            images.push("img/santaanpics/pic16.jpg");
-            images.push("img/santaanpics/pic13.jpg");
-            images.push("img/parents.png");
-            images.push("img/santaanpics/pic9.jpg");
-
-            $("#hero_banner").backstretch(images, {
-                speed: 3000,
-                centeredY: true
-            });
-
-            //parseRSS('https://news.google.com/news?cf=all&ned=in&hl=en&output=rss&q=IVF+clinics+india');
+    function attachEventOnTile() {
+        $(".tile-panel").on('click', function(e) {
+            var dataFromTile = $(this).attr('data-for-tile');
+            showSelectedCity(dataFromTile);
+            //alert(dataFromTile);
+            console.log(dataFromTile);
         });
-    </script>
+    }
+
+    function showSelectedCity(whichOne) {
+        var featuredCity = cityData[whichOne];
+        searchLat = featuredCity.searchLat;
+        searchLon = featuredCity.searchLon;
+        searchLocationText = featuredCity.name;
+        searchResults = [];
+        paginator = undefined;
+        window.location.href = "#/list";
+    }
+
+    function setupTiles() {
+        var layouts = [6, 6, 4, 4, 4];
+        var index = -1;
+
+        function getSpan() {
+            index++;
+            if (index >= layouts.length) {
+                index = 0;
+            };
+            return layouts[index];
+        }
+
+        for (var i = 0; i < cityData.length; i++) {
+            cityData[i].spans = getSpan();
+            cityData[i].citySelected = i;
+            if (cityData[i].image.length < 1) {
+                cityData[i].image = 'http://lorempixel.com/600/400/city/' + Math.abs(i % 10);
+            }
+        }
+
+        var tiletemplate = $('#ONE_TILE_DARKOVERLAY').html();
+        var tilesHtml = Mustache.to_html(tiletemplate, {
+            tiles: cityData
+        });
+        $("#cities").html(tilesHtml);
+        attachEventOnTile();
+    }
+
+
+    $(document).ready(function() {
+        setupTiles();
+        var images = [];
+
+        //images.push("http://www.owenhodge.com.au/wp-content/uploads/2015/04/New-Parents1.png");
+        images.push("img/santaanpics/pic11.jpg");
+        images.push("img/santaanpics/pic5.jpg");
+        images.push("img/santaanpics/pic14.jpg");
+        images.push("img/santaanpics/pic16.jpg");
+        images.push("img/santaanpics/pic13.jpg");
+        images.push("img/parents.png");
+        //images.push("img/santaanpics/pic9.jpg");
+
+        $("#hero_banner").backstretch(images, {
+            speed: 3000,
+            centeredY: true
+        });
+
+        if (newsItems == undefined || newsItems.length < 1) {
+            loadData("IVF clinics India");
+        } else {
+            renderNews(newsItems);
+        }
+
+
+        //parseRSS('https://news.google.com/news?cf=all&ned=in&hl=en&output=rss&q=IVF+clinics+india');
+    });
+</script>
