@@ -92,43 +92,8 @@
 
 <div style="padding:20px 0px;background: #efefef;">
     <div class="container">
-
         <div class="row m_row" id="feeds">
-            <!-- <div id="feeds">
-
-            </div> -->
-            <!-- <div class="col-sm-3" id="sidebar"> -->
-
-            <!-- <div class="panel panel-default sidebar-panel" style="margin-top: 10px;">
-                    <div class="panel-body text-center">
-                        <p style="color:gray;">
-                            <strong>HOW DOES IVF WORK?</strong>
-                            <br> Watch this video to understand how IVF works.
-                        </p>
-                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/kcJWPWb2uBs" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-
-                <div class="panel panel-default  sidebar-panel" style="background: #efefef;">
-                    <div class="panel-body">
-                        <p style="font-family:verdana;font-size:1.2em;color: gray;text-align: center">
-                            Have a tip, pitch or guest column? Send us a note.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="panel panel-default  sidebar-panel">
-                    <div class="panel-body">
-                        <a class="embedly-card" href="https://www.youtube.com/watch?v=pvYaMRbOoCo">Ivf India Dr. K.D Nayar Explains Women Infertility Causes - Akanksha Ivf Centre Delhi</a>
-                        <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-                    </div>
-                </div>
-
-            </div> -->
-
         </div>
-        <br>
-        <br>
     </div>
 </div>
 
@@ -147,23 +112,19 @@
 </div>
 
 <div id="ONE_NEWS" style="display:none;">
-
     {{#news}}
-
     <div class="panel panel-default m_panel text-center" style="border-top:2px solid silver;border-radius:10px;">
         <div class="panel-body">
             <p style="text-align:center;font-size:1.2em;font-weight:bold;"> {{{title}}} </p>
-            <img src="{{image}}" alt="" width="175" class="center-block img-thumbnail" />
-            <p>
+            <img src="{{image}}" alt="" width="100%" class="center-block img-thumbnail img-responsive" />
+            <!-- <p>
                 {{description}}
-            </p>
+            </p> -->
+            <br>
             <a class="btn btn-info btn-sm" href="{{feedlink}}" target="_blank">Read More</a>
         </div>
-
     </div>
-
     {{/news}}
-
 </div>
 
 <script type="text/javascript" charset="utf-8">
