@@ -13,6 +13,20 @@ function loadData(text) {
         }
         var items = data.query.results.rss.channel.item;
         $.each(items, function(i, item) {
+
+            var img = "";
+
+            if (img = "") {
+                img = $(item.description)
+                    .find("img:first")
+                    .attr("src");
+            }
+
+            if (item.content) {
+                img = item.content.url;
+            }
+
+
             var oneItem = {
                 feedlink: item.link,
                 title: item.title,
@@ -20,7 +34,8 @@ function loadData(text) {
                 description: $(item.description).text(),
                 richDescription: item.description,
                 col2: $(item.description).find("td:first-child+td").html(),
-                image: $(item.description).find("img:first").attr("src")
+                // image: $(item.description).find("img:first").attr("src")
+                image: img
             };
             modifiedItems.push(oneItem);
         });
