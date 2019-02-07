@@ -1,12 +1,15 @@
 var newsItems;
+var App = {};
+App.feedData = {};
 
-function loadData(text) {
+
+function loadDataOld(text) {
     var skey = "'" + escape(text) + "'";
 
     text = encodeURI(text);
-    var yql = encodeURIComponent("select * from xml where url='https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en'");
+    var rssurl = "https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en";
     var modifiedItems = [];
-    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=" + yql + "&format=json&callback=?", function(data) {
+    $.get(rssurl, function(data) {
         if (!data.query.results.rss.channel.item || data.query.results.rss.channel.item.length < 1) {
             alert("No data found");
             return;
@@ -43,6 +46,61 @@ function loadData(text) {
         renderNews(modifiedItems);
     });
 }
+
+
+function loadData(text) {
+
+    jQuery.ajaxPrefilter(function(options) {
+        options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
+    });
+
+
+    var skey = "'" + escape(text) + "'";
+    if (App.feedData[skey] != undefined) {
+        var itemsFound = App.feedData[skey];
+        renderView(itemsFound);
+    } else {
+        text = encodeURI(text);
+        var modifiedItems = [];
+        var rssurl = "https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en";
+
+        $.get(rssurl, function(data) { // GET call
+
+            var $xml = $(data);
+            $xml.find("item").each(function() { // xml loop
+
+                var item = $(this),
+                    one_item = {
+                        feedlink: item.find("link").text(),
+                        title: item.find("title").text(),
+                        date: item.find("pubDate").text(),
+                        description: item.find("description").text(),
+                        richDescription: item.find("description").text(),
+                        author: item.find("author").text(),
+                    };
+
+                var content = item.find("media\\:content,content");
+
+                if (content.attr("medium") == "image") {
+                    var img = content.attr("url");
+                    one_item.has_image = true;
+                    one_item.image = img;
+                }
+                modifiedItems.push(one_item);
+
+            }); // xml loop end
+
+            modifiedItems.sort(function(a, b) {
+                return new
+                Date(b.date) - new Date(a.date);
+            });
+            //App.feedData[skey] = modifiedItems;
+            renderNews(modifiedItems);
+        });
+
+    }
+}
+
 
 
 function renderNews(newsItems) {

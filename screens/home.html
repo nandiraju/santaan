@@ -50,11 +50,11 @@
         <div class="row">
             <div class="animated fadeInDown col-sm-12 text-center">
                 <h1 id="lead_text">FIND
-                    <br/>
+                    <br />
                     <span>INFERTILITY CLINICS</span></h1>
                 <button onclick="$('body').trigger('show_search_screen');" class="btn btn-primary btn-lg" style="border-radius: 0px;background-color: rgba(0,0,0,0.5);border:1px dotted black;">
-					Search by city
-				</button>
+                    Search by city
+                </button>
                 <br />
                 <br />
             </div>
@@ -97,7 +97,7 @@
     </div>
 </div>
 
-<div id="ONE_TILE_DARKOVERLAY" style="display:none;">
+<template id="ONE_TILE_DARKOVERLAY" style="display:none;">
     {{#tiles}}
     <div class="cover-card col-sm-{{spans}} tile-holder">
         <div class="panel panel-default tile-panel" data-for-tile="{{citySelected}}" style="cursor: pointer">
@@ -109,23 +109,29 @@
         </div>
     </div>
     {{/tiles}}
-</div>
+</template>
 
-<div id="ONE_NEWS" style="display:none;">
+<template id="ONE_NEWS" style="display:none;">
     {{#news}}
     <div class="panel panel-default m_panel text-center" style="border-top:2px solid silver;border-radius:10px;">
         <div class="panel-body">
             <p style="text-align:center;font-size:1.2em;font-weight:bold;"> {{{title}}} </p>
+
+            {{#has_image}}
             <img src="{{image}}" alt="" width="100%" class="center-block img-thumbnail img-responsive" />
-            <!-- <p>
-                {{description}}
-            </p> -->
+            {{/has_image}}
+            {{^has_image}}
+
+            {{/has_image}}
+            <p style="pointer-events:none;position: relative;">
+                {{{description}}}
+            </p>
             <br>
-            <a class="btn btn-info btn-sm" href="{{feedlink}}" target="_blank">Read More</a>
+            <a class="btn btn-info btn-sm" style="border-radius:15px;" href="{{feedlink}}" target="_blank">Read More</a>
         </div>
     </div>
     {{/news}}
-</div>
+</template>
 
 <script type="text/javascript" charset="utf-8">
     var cityData = [{
