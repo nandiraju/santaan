@@ -47,45 +47,11 @@ function loadDataOld(text) {
     });
 }
 
-
-// feedLoaded flag
-
-// var feedLoaded = false;
-// // stash a copy of the true prefilter function
-// var _ajaxPrefilter = $.ajaxPrefilter;
-// // create the proxy
-// $.ajaxPrefilter = function(func) {
-//     _ajaxPrefilter(function() {
-//         if (testFlag) {
-//             func.apply(this, arguments);
-//         }
-//     });
-// };
-
-// load my libraries here ...
-
-// then restore the original prefilter function
-// $.ajaxPrefilter = _ajaxPrefilter;
-
-var _ajaxPrefilter = $.ajaxPrefilter;
-
 function loadData(text) {
 
     if (newsItems != undefined && newsItems.length > 0) {
         return;
     }
-
-
-    // jQuery.ajaxPrefilter(function(options) {
-    //     options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
-    // });
-
-    // $.ajaxPrefilter = function(func) {
-    //     _ajaxPrefilter(function() {
-    //         options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
-    //     });
-    // };
-
 
     var skey = "'" + escape(text) + "'";
     if (App.feedData[skey] != undefined) {
@@ -94,7 +60,10 @@ function loadData(text) {
     } else {
         text = encodeURI(text);
         var modifiedItems = [];
-        var rssurl = "https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en";
+        // var rssurl = "https://news.google.com/news/rss/search/section/q/" + text + "/?ned=us&gl=US&hl=en";
+        var rssurl = "http://nandiraju.com/CLIENTS/news/read.php?q=" + text;
+
+
 
         $.get(rssurl, function(data) { // GET call
 
@@ -127,7 +96,6 @@ function loadData(text) {
                 Date(b.date) - new Date(a.date);
             });
             //App.feedData[skey] = modifiedItems;
-            //$.ajaxPrefilter = _ajaxPrefilter;
             renderNews(modifiedItems);
         });
 
