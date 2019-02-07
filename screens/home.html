@@ -129,7 +129,7 @@
             {{^has_image}}
 
             {{/has_image}}
-            <p style="pointer-events:none;position: relative;">
+            <p style="position: relative;">
                 {{{description}}}
             </p>
             <br>
@@ -243,11 +243,11 @@
             centeredY: true
         });
 
-        if (newsItems == undefined || newsItems.length < 1) {
-            loadData("IVF clinics India");
-        } else {
-            renderNews(newsItems);
-        }
+        // if (newsItems == undefined || newsItems.length < 1) {
+        //     loadData("IVF clinics India");
+        // } else {
+        //     renderNews(newsItems);
+        // }
 
 
         //parseRSS('https://news.google.com/news?cf=all&ned=in&hl=en&output=rss&q=IVF+clinics+india');

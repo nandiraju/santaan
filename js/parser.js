@@ -48,11 +48,43 @@ function loadDataOld(text) {
 }
 
 
+// feedLoaded flag
+
+// var feedLoaded = false;
+// // stash a copy of the true prefilter function
+// var _ajaxPrefilter = $.ajaxPrefilter;
+// // create the proxy
+// $.ajaxPrefilter = function(func) {
+//     _ajaxPrefilter(function() {
+//         if (testFlag) {
+//             func.apply(this, arguments);
+//         }
+//     });
+// };
+
+// load my libraries here ...
+
+// then restore the original prefilter function
+// $.ajaxPrefilter = _ajaxPrefilter;
+
+var _ajaxPrefilter = $.ajaxPrefilter;
+
 function loadData(text) {
 
-    jQuery.ajaxPrefilter(function(options) {
-        options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
-    });
+    if (newsItems != undefined && newsItems.length > 0) {
+        return;
+    }
+
+
+    // jQuery.ajaxPrefilter(function(options) {
+    //     options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
+    // });
+
+    // $.ajaxPrefilter = function(func) {
+    //     _ajaxPrefilter(function() {
+    //         options.url = "https://cors-anywhere.herokuapp.com/" + options.url;
+    //     });
+    // };
 
 
     var skey = "'" + escape(text) + "'";
@@ -95,6 +127,7 @@ function loadData(text) {
                 Date(b.date) - new Date(a.date);
             });
             //App.feedData[skey] = modifiedItems;
+            //$.ajaxPrefilter = _ajaxPrefilter;
             renderNews(modifiedItems);
         });
 
